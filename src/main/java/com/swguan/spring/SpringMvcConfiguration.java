@@ -8,8 +8,8 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import com.swguan.interceptor.GlobalInterceptor;
 import com.swguan.interceptor.LoginInterceptor;
-import com.swguan.interceptor.StopWatchHandlerInterceptor;
 
 @Configuration
 @ComponentScan({ "com.swguan" })
@@ -17,7 +17,7 @@ public class SpringMvcConfiguration extends DelegatingWebMvcConfiguration {
 	
 	@Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new StopWatchHandlerInterceptor());
+        registry.addInterceptor(new GlobalInterceptor());
         registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/login");
     }
 	
@@ -29,4 +29,5 @@ public class SpringMvcConfiguration extends DelegatingWebMvcConfiguration {
 		resolver.setViewClass(JstlView.class);
 		registry.viewResolver(resolver);
 	}
+	
 }
